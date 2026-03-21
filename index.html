@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pesquisa</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial;
+      background: linear-gradient(135deg, #111, #222);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 28px;
+      margin-bottom: 40px;
+    }
+
+    .btn {
+      padding: 20px 30px;
+      margin: 10px;
+      font-size: 18px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      width: 80%;
+      max-width: 300px;
+      transition: 0.2s;
+    }
+
+    .sim { background: #00c853; }
+    .nao { background: #d50000; }
+
+    .btn:active {
+      transform: scale(0.95);
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+
+<div id="tela-pergunta">
+  <h1>Você gostaria dessa experiência no seu atendimento?</h1>
+
+  <button class="btn sim" onclick="responder('Sim')">
+    Quero essa experiência
+  </button>
+
+  <button class="btn nao" onclick="responder('Não')">
+    Prefiro como está
+  </button>
+</div>
+
+<div id="tela-obrigado" class="hidden">
+  <h1>Obrigado pela sua resposta 🙌</h1>
+</div>
+
+<script>
+function responder(valor) {
+
+  fetch("https://script.google.com/macros/s/AKfycbzv3pRzGk9iWGCZ8JnVCNhSlvftLaVYtrY-N2XvMC91GFr6vkTtWC6u8yhq3V6vedq4/exec", {
+    method: "POST",
+    body: JSON.stringify({ resposta: valor })
+  });
+
+  // troca de tela (fica mais profissional)
+  document.getElementById("tela-pergunta").classList.add("hidden");
+  document.getElementById("tela-obrigado").classList.remove("hidden");
+
+  // volta sozinho depois de 3 segundos
+  setTimeout(() => {
+    document.getElementById("tela-pergunta").classList.remove("hidden");
+    document.getElementById("tela-obrigado").classList.add("hidden");
+  }, 3000);
+}
+</script>
+
+</body>
+</html>
