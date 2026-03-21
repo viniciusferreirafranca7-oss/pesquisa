@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pesquisa</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pesquisa</title>
 
-  <style>
+<style>
 #bg-video {
   position: fixed;
   top: 0;
@@ -13,52 +13,57 @@
   height: 100%;
   object-fit: cover;
   z-index: -1;
-}    body <video autoplay muted loop id="bg-video">
-  <source src="cadeira.mp4" type="video/mp4">
-</video>{
-      margin: 0;
-      font-family: Arial;
-      background: linear-gradient(135deg, #111, #222);
-      color: white;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      text-align: center;
-    }
+}
 
-    h1 {
-      font-size: 28px;
-      margin-bottom: 40px;
-    }
+body {
+  margin: 0;
+  font-family: Arial;
+  background: linear-gradient(135deg, #111, #222);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+}
 
-    .btn {
-      padding: 20px 30px;
-      margin: 10px;
-      font-size: 18px;
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
-      width: 80%;
-      max-width: 300px;
-      transition: 0.2s;
-    }
+h1 {
+  font-size: 28px;
+  margin-bottom: 40px;
+}
 
-    .sim { background: #00c853; }
-    .nao { background: #d50000; }
+.btn {
+  padding: 20px 30px;
+  margin: 10px;
+  font-size: 18px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  width: 80%;
+  max-width: 300px;
+  transition: 0.2s;
+}
 
-    .btn:active {
-      transform: scale(0.95);
-    }
+.sim { background: #00c853; }
+.nao { background: #d50000; }
 
-    .hidden {
-      display: none;
-    }
-  </style>
+.btn:active {
+  transform: scale(0.95);
+}
+
+.hidden {
+  display: none;
+}
+</style>
 </head>
 
 <body>
+
+<!-- ✅ VÍDEO AQUI (FORA DO STYLE) -->
+<video autoplay muted loop id="bg-video">
+  <source src="cadeira.mp4" type="video/mp4">
+</video>
 
 <div id="tela-pergunta">
   <h1>Você gostaria dessa experiência no seu atendimento?</h1>
@@ -84,11 +89,9 @@ function responder(valor) {
     body: JSON.stringify({ resposta: valor })
   });
 
-  // troca de tela (fica mais profissional)
   document.getElementById("tela-pergunta").classList.add("hidden");
   document.getElementById("tela-obrigado").classList.remove("hidden");
 
-  // volta sozinho depois de 3 segundos
   setTimeout(() => {
     document.getElementById("tela-pergunta").classList.remove("hidden");
     document.getElementById("tela-obrigado").classList.add("hidden");
