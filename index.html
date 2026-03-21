@@ -13,6 +13,7 @@
   height: 100%;
   object-fit: cover;
   z-index: -1;
+  opacity: 0.4;
 }
 
 body {
@@ -60,9 +61,9 @@ h1 {
 
 <body>
 
-<!-- ✅ VÍDEO AQUI (FORA DO STYLE) -->
-<video autoplay muted loop id="bg-video">
-  <source src="cadeira.mp4" type="video/mp4">
+<!-- 🎥 VÍDEO DE FUNDO -->
+<video autoplay muted loop playsinline webkit-playsinline id="bg-video">
+  <source src="./cadeira.mp4" type="video/mp4">
 </video>
 
 <div id="tela-pergunta">
@@ -97,6 +98,14 @@ function responder(valor) {
     document.getElementById("tela-obrigado").classList.add("hidden");
   }, 3000);
 }
+
+// 👇 força o vídeo rodar no iPad após toque
+document.addEventListener("click", function() {
+  const video = document.getElementById("bg-video");
+  if (video) {
+    video.play().catch(() => {});
+  }
+});
 </script>
 
 </body>
