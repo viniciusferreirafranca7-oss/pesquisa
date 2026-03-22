@@ -5,6 +5,7 @@
 <title>Pesquisa</title>
 
 <style>
+/* 🎥 VÍDEO DE FUNDO */
 #bg-video {
   position: fixed;
   top: 0;
@@ -12,21 +13,36 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  z-index: -1;
-  opacity: 0.4;
+  z-index: -1; /* fica atrás de tudo */
 }
 
+/* 🖤 CAMADA ESCURA (melhora leitura) */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  z-index: 0;
+}
+
+/* 🧠 CONTEÚDO */
 body {
   margin: 0;
   font-family: Arial;
-  background: linear-gradient(135deg, #111, #222);
   color: white;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
   text-align: center;
+}
+
+/* conteúdo fica acima */
+.container {
+  position: relative;
+  z-index: 1;
 }
 
 h1 {
@@ -35,6 +51,87 @@ h1 {
 }
 
 .btn {
+  padding: 20px 30px;
+  margin: 10px;
+  font-size: 18px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  width: 80%;
+  max-width: 300px;
+  transition: 0.2s;
+}
+
+.sim { background: #00c853; }
+.nao { background: #d50000; }
+
+.btn:active {
+  transform: scale(0.95);
+}
+
+.hidden {
+  display: none;
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🎥 VÍDEO FUNDO (SEM CONTROLES) -->
+<video autoplay muted loop playsinline id="bg-video">
+  <source src="cadeira.mp4" type="video/mp4">
+</video>
+
+<!-- camada escura -->
+<div class="overlay"></div>
+
+<!-- 🧠 CONTEÚDO -->
+<div class="container">
+
+  <div id="tela-pergunta">
+    <h1>Você gostaria dessa experiência no seu atendimento?</h1>
+
+    <button class="btn sim" onclick="responder('Sim')">
+      Quero essa experiência
+    </button>
+
+    <button class="btn nao" onclick="responder('Não')">
+      Prefiro como está
+    </button>
+  </div>
+
+  <div id="tela-obrigado" class="hidden">
+    <h1>Obrigado pela sua resposta 🙌</h1>
+  </div>
+
+</div>
+
+<script>
+function responder(valor) {
+
+  fetch("https://script.google.com/macros/s/AKfycbzv3pRzGk9iWGCZ8JnVCNhSlvftLaVYtrY-N2XvMC91GFr6vkTtWC6u8yhq3V6vedq4/exec", {
+    method: "POST",
+    body: JSON.stringify({ resposta: valor })
+  });
+
+  document.getElementById("tela-pergunta").classList.add("hidden");
+  document.getElementById("tela-obrigado").classList.remove("hidden");
+
+  setTimeout(() => {
+    document.getElementById("tela-pergunta").classList.remove("hidden");
+    document.getElementById("tela-obrigado").classList.add("hidden");
+  }, 3000);
+}
+
+/* força play no iPad */
+document.addEventListener("click", function() {
+  const video = document.getElementById("bg-video");
+  video.play().catch(()=>{});
+});
+</script>
+
+</body>
+</html>.btn {
   padding: 20px 30px;
   margin: 10px;
   font-size: 18px;
