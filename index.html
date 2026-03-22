@@ -4,7 +4,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
-<title>Pesquisa</title>
+<title>Experiência Premium</title>
 
 <style>
 
@@ -21,51 +21,180 @@ html, body {
   font-family: -apple-system, BlinkMacSystemFont, Arial;
 }
 
+/* FUNDO */
 body {
-  background: url("fundo.png") no-repeat center center fixed;
+  background: url("fundo.png") no-repeat center center;
   background-size: cover;
+  transition: transform 0.1s ease-out;
 }
 
+/* BRILHO SPA */
+.glow {
+  position: fixed;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(255,200,100,0.4), transparent);
+  border-radius: 50%;
+  top: 30%;
+  left: 30%;
+  animation: pulse 4s infinite alternate;
+  z-index: 1;
+}
+
+@keyframes pulse {
+  from { opacity: 0.3; transform: scale(1); }
+  to { opacity: 0.6; transform: scale(1.3); }
+}
+
+/* OVERLAY */
 .overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.35);
-  z-index: 1;
+  background: rgba(0,0,0,0.25);
+  z-index: 2;
 }
 
+/* CARD */
 .container {
   position: fixed;
   right: 5%;
   top: 50%;
   transform: translateY(-50%);
-  z-index: 10;
+  z-index: 3;
 
   width: 90%;
   max-width: 400px;
-  padding: 25px;
+  padding: 30px;
 
   background: rgba(255,255,255,0.08);
-  backdrop-filter: blur(15px);
+  backdrop-filter: blur(20px);
   border-radius: 20px;
 
-  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.6);
 
   text-align: center;
 }
 
+/* TEXTO */
 h1 {
   font-size: 24px;
   margin-bottom: 30px;
   color: white;
 }
 
+/* BOTÕES */
 .btn {
   padding: 18px;
   margin: 10px 0;
   font-size: 16px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  width: 100%;
+  font-weight: bold;
+  color: white;
+  transition: 0.3s;
+}
+
+/* VERDE */
+.sim {
+  background: linear-gradient(135deg, #00c853, #00e676);
+  box-shadow: 0 0 20px rgba(0,255,150,0.6);
+}
+
+/* VERMELHO */
+.nao {
+  background: linear-gradient(135deg, #d50000, #ff1744);
+  box-shadow: 0 0 20px rgba(255,0,0,0.6);
+}
+
+/* HOVER */
+.btn:hover {
+  transform: scale(1.07);
+}
+
+/* CLICK */
+.btn:active {
+  transform: scale(0.95);
+}
+
+.hidden {
+  display: none;
+}
+
+#tela-obrigado h1 {
+  color: #00e676;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="glow"></div>
+<div class="overlay"></div>
+
+<div class="container">
+
+  <div id="tela-pergunta">
+    <h1>Você gostaria dessa experiência no seu atendimento?</h1>
+
+    <button class="btn sim" onclick="responder('Sim')">
+      Quero essa experiência
+    </button>
+
+    <button class="btn nao" onclick="responder('Não')">
+      Prefiro como está
+    </button>
+  </div>
+
+  <div id="tela-obrigado" class="hidden">
+    <h1>Resposta enviada ✔</h1>
+  </div>
+
+</div>
+
+<script>
+
+/* PARALLAX COM DEDO / MOUSE */
+document.addEventListener("mousemove", (e) => {
+  const x = (e.clientX / window.innerWidth - 0.5) * 10;
+  const y = (e.clientY / window.innerHeight - 0.5) * 10;
+  document.body.style.transform = `translate(${x}px, ${y}px) scale(1.05)`;
+});
+
+/* iPad touch */
+document.addEventListener("touchmove", (e) => {
+  const touch = e.touches[0];
+  const x = (touch.clientX / window.innerWidth - 0.5) * 10;
+  const y = (touch.clientY / window.innerHeight - 0.5) * 10;
+  document.body.style.transform = `translate(${x}px, ${y}px) scale(1.05)`;
+});
+
+/* ENVIO */
+function responder(valor) {
+
+  fetch("https://script.google.com/macros/s/AKfycbzv3pRzGk9iWGCZ8JnVCNhSlvftLaVYtrY-N2XvMC91GFr6vkTtWC6u8yhq3V6vedq4/exec", {
+    method: "POST",
+    body: JSON.stringify({ resposta: valor })
+  });
+
+  document.getElementById("tela-pergunta").classList.add("hidden");
+  document.getElementById("tela-obrigado").classList.remove("hidden");
+
+  setTimeout(() => {
+    document.getElementById("tela-pergunta").classList.remove("hidden");
+    document.getElementById("tela-obrigado").classList.add("hidden");
+  }, 3000);
+}
+
+</script>
+
+</body>
+</html>  font-size: 16px;
   border: none;
   border-radius: 12px;
   cursor: pointer;
