@@ -1,152 +1,100 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Experiência Premium</title>
+  <meta charset="UTF-8">
+  <title>NAY Experience Hub</title>
+</head>
 
-<style>
+<body style="margin:0; font-family: Arial;">
 
-/* RESET */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-/* FUNDO COM MOVIMENTO */
-body {
-  font-family: Arial, sans-serif;
-  height: 100vh;
-  background: url("cadeira.png") no-repeat center center/cover;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  animation: zoom 20s ease-in-out infinite alternate;
-}
-
-/* EFEITO DE MOVIMENTO */
-@keyframes zoom {
-  0% { background-size: 100%; }
-  100% { background-size: 110%; }
-}
-
-/* ESCURECER LEVEMENTE */
-body::before {
-  content: "";
+  <!-- VÍDEO DE FUNDO -->
+  <video autoplay muted loop playsinline style="
   position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+  ">
+    <source src="videos.mp4" type="video/mp4">
+  </video>
+
+  <!-- OVERLAY ESCURO -->
+  <div style="
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   background: rgba(0,0,0,0.35);
-  top: 0;
-  left: 0;
-}
+  z-index: -1;
+  "></div>
 
-/* CARD */
-.container {
-  position: relative;
-  z-index: 1;
-  background: rgba(255,255,255,0.08);
-  backdrop-filter: blur(18px);
-  padding: 40px;
-  border-radius: 20px;
+  <!-- ENQUETE -->
+  <div style="
+  position: absolute;
+  right: 8%;
+  top: 50%;
+  transform: translateY(-50%);
   text-align: center;
-  width: 90%;
-  max-width: 350px;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.6);
-}
-
-/* TEXTO */
-h1 {
-  font-size: 20px;
-  margin-bottom: 30px;
   color: white;
-}
+  max-width: 400px;
+  ">
 
-/* BOTÕES BASE */
-.btn {
-  padding: 18px;
-  margin: 10px 0;
-  font-size: 16px;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
-  width: 100%;
-  font-weight: bold;
-  color: white;
-  transition: 0.3s;
-}
+    <h1 style="
+    font-size: 32px;
+    margin-bottom: 25px;
+    line-height: 1.3;
+    ">
+      Você pagaria a mais por essa experiência no salão?
+    </h1>
 
-/* VERDE */
-.sim {
-  background: linear-gradient(135deg, #00c853, #00ff88);
-  box-shadow: 0 10px 30px rgba(0,255,150,0.5);
-}
+    <div style="
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    ">
 
-/* VERMELHO */
-.nao {
-  background: linear-gradient(135deg, #d50000, #ff3b3b);
-  box-shadow: 0 10px 30px rgba(255,0,0,0.5);
-}
+      <button onclick="enviar('Sim')" style="
+      padding: 14px 30px;
+      font-size: 16px;
+      background: #28a745;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      ">
+        👍 Sim
+      </button>
 
-/* HOVER */
-.btn:hover {
-  transform: scale(1.05);
-}
+      <button onclick="enviar('Não')" style="
+      padding: 14px 30px;
+      font-size: 16px;
+      background: #dc3545;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      ">
+        👎 Não
+      </button>
 
-/* OCULTAR */
-.hidden {
-  display: none;
-}
+    </div>
 
-/* TELA FINAL */
-#tela-obrigado h1 {
-  font-size: 22px;
-  color: #00ffcc;
-}
-
-</style>
-</head>
-
-<body>
-
-<div class="container">
-
-  <div id="tela-pergunta">
-    <h1>Você gostaria dessa experiência no seu atendimento?</h1>
-
-    <button class="btn sim" onclick="responder('Sim')">
-      Quero essa experiência
-    </button>
-
-    <button class="btn nao" onclick="responder('Não')">
-      Prefiro como está
-    </button>
   </div>
 
-  <div id="tela-obrigado" class="hidden">
-    <h1>Obrigado pela sua resposta 🙌</h1>
-  </div>
-
-</div>
-
-<script>
-function responder(valor) {
-
-  fetch("https://script.google.com/macros/s/AKfycbzv3pRzGk9iWGCZ8JnVCNhSlvftLaVYtrY-N2XvMC91GFr6vkTtWC6u8yhq3V6vedq4/exec", {
-    method: "POST",
-    body: JSON.stringify({ resposta: valor })
-  });
-
-  document.getElementById("tela-pergunta").classList.add("hidden");
-  document.getElementById("tela-obrigado").classList.remove("hidden");
-
-  setTimeout(() => {
-    document.getElementById("tela-pergunta").classList.remove("hidden");
-    document.getElementById("tela-obrigado").classList.add("hidden");
-  }, 3000);
-}
-</script>
+  <!-- SCRIPT -->
+  <script>
+    function enviar(resposta) {
+      fetch("https://script.google.com/macros/s/AKfycbzCYqevLM1S_8TghfaC2KU4myI8KOilGKgDuID5aLC1Gt_6K9KU_sFUqz_fqO5kwPdt8A/exec", {
+        method: "POST",
+        body: JSON.stringify({ resposta: resposta })
+      })
+      .then(() => alert("Resposta enviada!"))
+      .catch(() => alert("Erro ao enviar"));
+    }
+  </script>
 
 </body>
 </html>
