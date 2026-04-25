@@ -9,73 +9,73 @@
 
   <!-- VÍDEO DE FUNDO -->
   <video autoplay muted loop playsinline style="
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: -1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
   ">
     <source src="videoss.mp4" type="video/mp4">
   </video>
 
   <!-- OVERLAY ESCURO -->
   <div style="
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.35);
-  z-index: -1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.35);
+    z-index: -1;
   "></div>
 
   <!-- ENQUETE -->
   <div style="
-  position: absolute;
-  right: 8%;
-  top: 50%;
-  transform: translateY(-50%);
-  text-align: center;
-  color: white;
-  max-width: 400px;
+    position: absolute;
+    right: 8%;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
+    color: white;
+    max-width: 400px;
   ">
 
     <h1 style="
-    font-size: 32px;
-    margin-bottom: 25px;
-    line-height: 1.3;
+      font-size: 32px;
+      margin-bottom: 25px;
+      line-height: 1.3;
     ">
       Você pagaria a mais por essa experiência no salão?
     </h1>
 
     <div style="
-    display: flex;
-    gap: 15px;
-    justify-content: center;
+      display: flex;
+      gap: 15px;
+      justify-content: center;
     ">
 
       <button onclick="enviar('Sim')" style="
-      padding: 14px 30px;
-      font-size: 16px;
-      background: #28a745;
-      color: white;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
+        padding: 14px 30px;
+        font-size: 16px;
+        background: #28a745;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
       ">
         👍 Sim
       </button>
 
       <button onclick="enviar('Não')" style="
-      padding: 14px 30px;
-      font-size: 16px;
-      background: #dc3545;
-      color: white;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
+        padding: 14px 30px;
+        font-size: 16px;
+        background: #dc3545;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
       ">
         👎 Não
       </button>
