@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tela experiência premium</title>
 
   <style>
+
     *{
       margin:0;
       padding:0;
       box-sizing:border-box;
-      font-family:Arial, sans-serif;
+      font-family:Arial,sans-serif;
     }
 
     body{
@@ -21,7 +22,8 @@
       background:black;
     }
 
-    /* VÍDEO */
+    /* VIDEO */
+
     #bg-video{
       position:fixed;
       top:0;
@@ -32,7 +34,8 @@
       z-index:-2;
     }
 
-    /* OVERLAY ESCURO */
+    /* OVERLAY */
+
     .overlay{
       position:fixed;
       inset:0;
@@ -41,6 +44,7 @@
     }
 
     /* CONTEÚDO */
+
     .content{
       position:absolute;
       right:70px;
@@ -73,25 +77,26 @@
       font-weight:bold;
     }
 
+    button:hover{
+      transform:scale(1.05);
+    }
+
     button:active{
       transform:scale(0.96);
     }
 
     .yes{
-      background:#32d96b;
+      background:#2ecc71;
       color:white;
     }
 
     .no{
-      background:#ff5a4f;
+      background:#e74c3c;
       color:white;
     }
 
-    button:hover{
-      transform:scale(1.05);
-    }
-
     /* MOBILE */
+
     @media(max-width:768px){
 
       .content{
@@ -108,21 +113,26 @@
         font-size:20px;
         padding:16px 24px;
       }
+
     }
+
   </style>
 </head>
 
 <body>
 
-  <!-- VÍDEO -->
+  <!-- VIDEO -->
+
   <video autoplay muted loop playsinline preload="auto" id="bg-video">
     <source src="massagem.mp4" type="video/mp4">
   </video>
 
-  <!-- ESCURECIMENTO -->
+  <!-- OVERLAY -->
+
   <div class="overlay"></div>
 
   <!-- TEXTO -->
+
   <div class="content">
 
     <h1>
@@ -130,22 +140,46 @@
     </h1>
 
     <div class="buttons">
-      <button class="yes" onclick="vote('Sim')">👍 Sim</button>
 
-      <button class="no" onclick="vote('Não')">👎 Não</button>
+      <button class="yes" onclick="vote('Sim')">
+        👍 Sim
+      </button>
+
+      <button class="no" onclick="vote('Não')">
+        👎 Não
+      </button>
+
     </div>
 
   </div>
 
   <!-- SCRIPT -->
+
   <script>
 
-    function vote(resposta){
+    async function vote(resposta){
 
-      console.log("Resposta:", resposta);
+      try{
 
-      // FEEDBACK INSTANTÂNEO
-      alert("Você escolheu: " + resposta);
+        await fetch("COLE_SEU_LINK_DO_GOOGLE_SCRIPT_AQUI", {
+
+          method: "POST",
+
+          body: JSON.stringify({
+            resposta: resposta
+          })
+
+        });
+
+        alert("Resposta enviada com sucesso!");
+
+      }catch(erro){
+
+        alert("Erro ao enviar resposta.");
+
+        console.log(erro);
+
+      }
 
     }
 
