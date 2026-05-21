@@ -1,106 +1,112 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Tela experiência premium</title>
 
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:Arial, sans-serif;
     }
 
-    body {
-      overflow: hidden;
-      height: 100vh;
-      width: 100vw;
-      position: relative;
-      color: white;
+    body{
+      overflow:hidden;
+      width:100vw;
+      height:100vh;
+      position:relative;
+      background:black;
     }
 
-    /* Vídeo de fundo */
-    #bg-video {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      z-index: -2;
+    /* VÍDEO */
+    #bg-video{
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      z-index:-2;
     }
 
-    /* Overlay escuro premium */
-    .overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.35);
-      z-index: -1;
+    /* OVERLAY ESCURO */
+    .overlay{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,0.30);
+      z-index:-1;
     }
 
-    /* Conteúdo */
-    .content {
-      position: absolute;
-      right: 80px;
-      bottom: 100px;
-      text-align: center;
-      max-width: 500px;
+    /* CONTEÚDO */
+    .content{
+      position:absolute;
+      right:70px;
+      bottom:90px;
+      text-align:center;
+      color:white;
+      max-width:500px;
     }
 
-    .content h1 {
-      font-size: 42px;
-      line-height: 1.2;
-      margin-bottom: 30px;
-      text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    .content h1{
+      font-size:48px;
+      line-height:1.2;
+      margin-bottom:30px;
+      text-shadow:0 4px 12px rgba(0,0,0,0.5);
     }
 
-    .buttons {
-      display: flex;
-      gap: 20px;
-      justify-content: center;
+    .buttons{
+      display:flex;
+      justify-content:center;
+      gap:20px;
     }
 
-    button {
-      border: none;
-      padding: 18px 35px;
-      font-size: 22px;
-      border-radius: 14px;
-      cursor: pointer;
-      transition: 0.3s ease;
-      font-weight: bold;
+    button{
+      border:none;
+      padding:18px 34px;
+      font-size:24px;
+      border-radius:14px;
+      cursor:pointer;
+      transition:0.2s ease;
+      font-weight:bold;
     }
 
-    .yes {
-      background: #2ecc71;
-      color: white;
+    button:active{
+      transform:scale(0.96);
     }
 
-    .no {
-      background: #e74c3c;
-      color: white;
+    .yes{
+      background:#32d96b;
+      color:white;
     }
 
-    button:hover {
-      transform: scale(1.05);
+    .no{
+      background:#ff5a4f;
+      color:white;
     }
 
-    /* Mobile */
-    @media (max-width: 768px) {
-      .content {
-        right: 20px;
-        left: 20px;
-        bottom: 60px;
+    button:hover{
+      transform:scale(1.05);
+    }
+
+    /* MOBILE */
+    @media(max-width:768px){
+
+      .content{
+        left:20px;
+        right:20px;
+        bottom:60px;
       }
 
-      .content h1 {
-        font-size: 30px;
+      .content h1{
+        font-size:34px;
       }
 
-      button {
-        font-size: 18px;
-        padding: 14px 24px;
+      button{
+        font-size:20px;
+        padding:16px 24px;
       }
     }
   </style>
@@ -108,23 +114,42 @@
 
 <body>
 
-  <!-- Vídeo -->
-  <video autoplay muted loop playsinline id="bg-video">
+  <!-- VÍDEO -->
+  <video autoplay muted loop playsinline preload="auto" id="bg-video">
     <source src="massagem.mp4" type="video/mp4">
   </video>
 
-  <!-- Escurecimento -->
+  <!-- ESCURECIMENTO -->
   <div class="overlay"></div>
 
-  <!-- Texto -->
+  <!-- TEXTO -->
   <div class="content">
-    <h1>Você pagaria a mais por essa experiência no salão?</h1>
+
+    <h1>
+      Você pagaria a mais por essa experiência no salão?
+    </h1>
 
     <div class="buttons">
-      <button class="yes">👍 Sim</button>
-      <button class="no">👎 Não</button>
+      <button class="yes" onclick="vote('Sim')">👍 Sim</button>
+
+      <button class="no" onclick="vote('Não')">👎 Não</button>
     </div>
+
   </div>
+
+  <!-- SCRIPT -->
+  <script>
+
+    function vote(resposta){
+
+      console.log("Resposta:", resposta);
+
+      // FEEDBACK INSTANTÂNEO
+      alert("Você escolheu: " + resposta);
+
+    }
+
+  </script>
 
 </body>
 </html>
